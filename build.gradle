@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'application'
 }
+// Set source/target to 8 for now (only have 8 and 14 JDK installed), as cucumber do not like JVMs version 12+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     jcenter()
@@ -10,12 +13,31 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
-}
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.6.2'
 
-application {
-    mainClassName = 'github.workflow.kata.App'
+    testImplementation 'io.cucumber:cucumber-java8:6.8.1'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:6.8.1'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:6.8.1'
 }
 
 test {
     useJUnitPlatform()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'features', 'src/test/resources']
+            ignoreExitValue = true
+        }
+    }
 }
