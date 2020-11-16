@@ -10,7 +10,6 @@ Feature: As a live cell I will die if I have fewer than two live neighbours
       .*.
       ...
     """
-    When the generation is incremented
     Then the next generation should look like:
     """
       ***
