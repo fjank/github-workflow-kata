@@ -1,3 +1,4 @@
+![Java CI with Gradle](https://github.com/fjank/github-workflow-kata/workflows/Java%20CI%20with%20Gradle/badge.svg)
 # A Game of Life application
 Based on an initial fork for working with git/pulls/issues/projects.
 ## Getting started
