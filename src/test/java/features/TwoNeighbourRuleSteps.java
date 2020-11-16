@@ -19,9 +19,6 @@ public class TwoNeighbourRuleSteps implements En {
             grid = new Grid();
         });
 
-        When("the generation is incremented", () -> {
-
-        });
         Then("the next generation should look like:", (String gridDef) -> {
             Grid expected = new Grid();
             assertEquals(expected, grid);
