@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 // Set source/target to 8 for now (only have 8 and 14 JDK installed), as cucumber do not like JVMs version 12+
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -28,6 +29,10 @@ configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
+}
+
+tasks.withType(Checkstyle) {
+    ignoreFailures true
 }
 
 task cucumber() {
