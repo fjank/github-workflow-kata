@@ -5,24 +5,16 @@ import java.util.Objects;
 /**
  * Defines a key for the grid, when doing lookups.
  */
-public class GridKey {
+class GridKey {
     private final int col;
     private final int row;
 
     /**
      * Creates a new GridKey.
      */
-    public GridKey(int col, int row) {
+    public GridKey(int row, int col) {
         this.col = col;
         this.row = row;
-    }
-
-    int getCol() {
-        return col;
-    }
-
-    int getRow() {
-        return col;
     }
 
     @Override
