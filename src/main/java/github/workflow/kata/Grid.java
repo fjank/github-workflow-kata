@@ -1,31 +1,27 @@
 package github.workflow.kata;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * A gaming grid, with specified dimensions.
+ * A gaming grid.
  */
 public class Grid {
-    public Grid() {
+    private final String gridDef;
 
+    public Grid(String gridDef) {
+        this.gridDef = gridDef;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        // all grids considered equal
-        return true;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grid grid = (Grid) o;
+        return gridDef.equals(grid.gridDef);
     }
 
     @Override
     public int hashCode() {
-        return 42;
+        return Objects.hash(gridDef);
     }
 }
