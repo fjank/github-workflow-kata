@@ -1,25 +1,31 @@
 plugins {
-    id 'java'
     id 'application'
 }
-// Set source/target to 8 for now (only have 8 and 14 JDK installed), as cucumber do not like JVMs version 12+
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+application {
+    mainClass = 'github.workflow.kata.GOL'
+}
+
+version = '1.0.0-SNAPSHOT'
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
-    testImplementation 'io.cucumber:cucumber-java8:6.8.1'
-    testImplementation 'io.cucumber:cucumber-junit-platform-engine:6.8.1'
-    testImplementation 'io.cucumber:cucumber-junit-platform-engine:6.8.1'
+    testImplementation 'io.cucumber:cucumber-java8:6.9.0'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:6.9.0'
 }
 
+
+/* Test configuration */
 test {
     useJUnitPlatform()
 }
@@ -40,4 +46,8 @@ task cucumber() {
             ignoreExitValue = true
         }
     }
+}
+/* Gradle customization */
+tasks.named('wrapper') {
+    distributionType = Wrapper.DistributionType.ALL
 }
