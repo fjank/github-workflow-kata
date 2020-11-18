@@ -17,7 +17,8 @@ public class Grid {
         String[] rows = gridDef.trim().split("\n");
         grid = new char[rows.length][];
         for (int row = 0; row < rows.length; row++) {
-            grid[row] = rows[row].trim().toCharArray();
+            // replace all chars that is not . with *, thus adding support for live cells to be any character.
+            grid[row] = rows[row].trim().replaceAll("[^.]", "*").toCharArray();
         }
     }
 
@@ -29,12 +30,13 @@ public class Grid {
             for (int col = 0; col < colCount; col++) {
                 char ch = grid[row][col];
                 // Rule: As a live cell I will die if I have fewer than two live neighbours
-                if (ch == '*') {
-                    int liveCount = getLiveCountAround(row, col);
-                    newGrid[row][col] = liveCount < 2 ? '.' : '*';
-                } else {
-                    // cell is dead, it will also be dead next round.
+                // Rule 3: As a live cell I will die if i have more than three neighbours
+                int liveCount = getLiveCountAround(row, col);
+                if (ch == '*' && (liveCount < 2 || liveCount > 3)) {
                     newGrid[row][col] = '.';
+                } else {
+                    // Not covered by a rule, keep the cell state
+                    newGrid[row][col] = ch;
                 }
             }
         }
