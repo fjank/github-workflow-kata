@@ -5,16 +5,18 @@ import java.util.Arrays;
 /**
  * A gaming grid.
  */
-public class Grid {
+public final class Grid {
     private char[][] grid;
 
     /**
      * Extract the grid and store it as a char[][]
      * Makes sure the gridDef has no spaces, as equals does a string comparison, while the input can have spaces
      * around the grid definition.
+     *
+     * @param definition The string containing the grid definition, may have spaces around the grid.
      */
-    public Grid(String gridDef) {
-        String[] deflines = gridDef.trim().split("\n");
+    public Grid(String definition) {
+        String[] rows = definition.trim().split("\n");
         // skip row 0 and 1 as we do not need them for now. row 0 contains the generation string,
         // while row 1 contains the grid size.
         String[] rows = new String[deflines.length - 2];
@@ -25,6 +27,9 @@ public class Grid {
         }
     }
 
+    /**
+     * Invokes the rules for the next generation to the cells for this grid.
+     */
     public void nextGeneration() {
         int rowCount = grid.length;
         int colCount = grid[0].length;
@@ -72,10 +77,14 @@ public class Grid {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Grid grid = (Grid) o;
-        return Arrays.deepEquals(this.grid, grid.grid);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Grid other = (Grid) o;
+        return Arrays.deepEquals(this.grid, other.grid);
     }
 
     @Override
