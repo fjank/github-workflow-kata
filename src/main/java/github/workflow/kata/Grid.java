@@ -34,12 +34,16 @@ public final class Grid {
             for (int col = 0; col < colCount; col++) {
                 char ch = grid[row][col];
                 // Rule: As a live cell I will die if I have fewer than two live neighbours
+                int liveCount = getLiveCountAround(row, col);
                 if (ch == '*') {
-                    int liveCount = getLiveCountAround(row, col);
                     newGrid[row][col] = liveCount < 2 ? '.' : '*';
                 } else {
-                    // cell is dead, it will also be dead next round.
-                    newGrid[row][col] = '.';
+                    // cell is dead, check rule 4: As a dead cell I will regain life if i have exactly three neighbours
+                    if (liveCount == 3) {
+                        newGrid[row][col] = '*';
+                    } else {
+                        newGrid[row][col] = '.';
+                    }
                 }
             }
         }
