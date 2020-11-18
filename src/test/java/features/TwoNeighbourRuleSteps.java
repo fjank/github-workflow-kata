@@ -21,6 +21,7 @@ public class TwoNeighbourRuleSteps implements En {
 
         Then("the next generation should look like:", (String gridDef) -> {
             Grid expected = new Grid(gridDef);
+            grid.nextGeneration();
             assertEquals(expected, grid);
         });
     }
