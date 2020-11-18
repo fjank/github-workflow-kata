@@ -16,11 +16,11 @@ public class TwoNeighbourRuleSteps implements En {
      */
     public TwoNeighbourRuleSteps() {
         Given("the grid:", (String gridDef) -> {
-            grid = new Grid(gridDef);
+            grid = new Grid("Generation 1\n3 3\n" + gridDef);
         });
 
         Then("the next generation should look like:", (String gridDef) -> {
-            Grid expected = new Grid(gridDef);
+            Grid expected = new Grid("Generation 1\n3 3\n" + gridDef);
             grid.nextGeneration();
             assertEquals(expected, grid);
         });

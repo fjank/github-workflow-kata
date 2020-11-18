@@ -2,5 +2,7 @@
 .gradle
 # Ignore IDE generated files
 .idea
+/out/
+
 # Ignore Gradle build output directory
 build
