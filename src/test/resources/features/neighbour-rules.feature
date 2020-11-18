@@ -80,4 +80,4 @@ Feature: Cells live or die depending on a few rules:
       ..*..
       ..*..
     """
-
+    
