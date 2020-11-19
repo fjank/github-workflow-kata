@@ -40,8 +40,12 @@ public final class Grid {
                 if (ch == '*' && (liveCount < 2 || liveCount > 3)) {
                     newGrid[row][col] = '.';
                 } else {
-                    // Not covered by a rule, keep the cell state
-                    newGrid[row][col] = ch;
+                    // cell is dead, check rule 4: As a dead cell I will regain life if i have exactly three neighbours
+                    if (liveCount == 3) {
+                        newGrid[row][col] = '*';
+                    } else {
+                        newGrid[row][col] = '.';
+                    }
                 }
             }
         }
