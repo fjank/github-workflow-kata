@@ -19,8 +19,7 @@ public final class Grid {
         String[] rows = definition.trim().split("\n");
         grid = new char[rows.length][];
         for (int row = 0; row < rows.length; row++) {
-            // replace all chars that is not . with *, thus adding support for live cells to be any character.
-            grid[row] = rows[row].trim().replaceAll("[^.]", "*").toCharArray();
+            grid[row] = rows[row].trim().toCharArray();
         }
     }
 
@@ -34,18 +33,16 @@ public final class Grid {
         for (int row = 0; row < rowCount; row++) {
             for (int col = 0; col < colCount; col++) {
                 char ch = grid[row][col];
-                // Rule: As a live cell I will die if I have fewer than two live neighbours
-                // Rule 3: As a live cell I will die if i have more than three neighbours
                 int liveCount = getLiveCountAround(row, col);
-                if (ch == '*' && (liveCount < 2 || liveCount > 3)) {
-                    newGrid[row][col] = '.';
+                if (ch == '*') {
+                    // Rule 1: As a live cell I will die if I have fewer than two live neighbours
+                    // Rule 2: As a live cell I will live on if i have exactly two or three neighbours
+                    // Rule 3: As a live cell I will die if i have more than three neighbours
+                    newGrid[row][col] = (liveCount < 2 || liveCount > 3) ? '.' : '*';
                 } else {
-                    // cell is dead, check rule 4: As a dead cell I will regain life if i have exactly three neighbours
-                    if (liveCount == 3) {
-                        newGrid[row][col] = '*';
-                    } else {
-                        newGrid[row][col] = '.';
-                    }
+                    // cell is dead
+                    // Rule 4: As a dead cell I will regain life if i have exactly three neighbours
+                    newGrid[row][col] = (liveCount == 3) ? '*' : '.';
                 }
             }
         }
