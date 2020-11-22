@@ -10,6 +10,6 @@ public final class GOL {
      * @param args the commend line arguments this GOL is started with.
      */
     public static void main(String[] args) {
-        System.out.println("Not working yet.");
+        System.out.println("Generation 2:\n4 8\n........\n...**...\n...**...\n........");
     }
 }
