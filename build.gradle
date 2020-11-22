@@ -9,8 +9,8 @@ java {
 }
 application {
     mainClass = 'github.workflow.kata.GOL'
+    applicationName = 'gol'
 }
-
 version = '1.0.0-SNAPSHOT'
 
 repositories {

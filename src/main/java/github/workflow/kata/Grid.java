@@ -16,7 +16,11 @@ public final class Grid {
      * @param definition The string containing the grid definition, may have spaces around the grid.
      */
     public Grid(String definition) {
-        String[] rows = definition.trim().split("\n");
+        String[] deflines = definition.trim().split("\n");
+        // skip row 0 and 1 as we do not need them for now. row 0 contains the generation string,
+        // while row 1 contains the grid size.
+        String[] rows = new String[deflines.length - 2];
+        System.arraycopy(deflines, 2, rows, 0, rows.length);
         grid = new char[rows.length][];
         for (int row = 0; row < rows.length; row++) {
             grid[row] = rows[row].trim().toCharArray();

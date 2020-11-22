@@ -83,8 +83,7 @@ Feature: Cells live or die depending on a few rules:
       ..*..
       ..*..
     """
-
-  Scenario: A grid where some cells have 4 or more neighbours, covering rule 3, with rule 4 additions
+Scenario: A grid where some cells have 4 or more neighbours, covering rule 3, with rule 4 additions
     Cell with 4 or more neighbours should die, some will respawn
     Given the grid:
     """
