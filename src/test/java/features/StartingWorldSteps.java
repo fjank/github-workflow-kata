@@ -23,7 +23,6 @@ public class StartingWorldSteps implements En {
             System.setIn(appInputStream);
             System.setOut(new PrintStream(appResultOutputStream));
             appInputStream.appendData(definition + "\n\n");
-            GOL.main(new String[]{});
             String input = definition + "\n\n";
             InputStream customin = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
             InputStream oldIn = System.in;
