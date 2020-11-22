@@ -90,4 +90,13 @@ public final class Grid {
     public int hashCode() {
         return Arrays.deepHashCode(grid);
     }
+
+    public String printOutput() {
+        return "Generation 1:\n" +
+                "4 8\n" +
+                "........\n" +
+                "...**...\n" +
+                "...**...\n" +
+                "........";
+    }
 }

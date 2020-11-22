@@ -3,10 +3,7 @@ package features;
 import github.workflow.kata.GOL;
 import io.cucumber.java8.En;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +23,13 @@ public class StartingWorldSteps implements En {
             System.setIn(appInputStream);
             System.setOut(new PrintStream(appResultOutputStream));
             appInputStream.appendData(definition + "\n\n");
+            String input = definition + "\n\n";
+            InputStream customin = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+            InputStream oldIn = System.in;
+            System.setIn(customin);
+            System.setOut(new PrintStream(appResultOutputStream));
             GOL.main(new String[]{});
+            System.setIn(oldIn);
         });
         Then("the output should be", (String expected) -> {
             String actual = new String(this.appResultOutputStream.toByteArray(), StandardCharsets.UTF_8).trim();
@@ -36,6 +39,7 @@ public class StartingWorldSteps implements En {
             appInputStream.appendData("\n");
         });
     }
+
 
     /**
      * Nice little inputstream that allows us to let have a dynamic inputstream, very usable in BDD tests.
