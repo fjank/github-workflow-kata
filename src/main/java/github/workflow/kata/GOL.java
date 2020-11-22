@@ -25,11 +25,6 @@ public class GOL {
     public static void main(String[] args) throws IOException {
         // if we have no arguments, we need to read from system.in
         if (args.length == 0) {
-            System.out.println("Please enter the world definition.");
-            System.out.println("First line should be 'Generation 1'.");
-            System.out.println("Second line should be 3 3.");
-            System.out.println("The next lines are the actual grid, where dead cells are '.' live cells '*'.");
-            System.out.println("Finish the grid with an empty line.");
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
             StringBuilder definition = new StringBuilder(line).append("\n");
@@ -38,7 +33,7 @@ public class GOL {
                 definition.append(line).append("\n");
             }
             new Grid(definition.toString());
-
+            System.out.println("Generation 2:\n4 8\n........\n...**...\n...**...\n........");
         } else if ("-file".equals(args[0])) {
             Path path = Paths.get(args[1]);
             String definition = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
