@@ -19,6 +19,10 @@ public class StartingWorldSteps implements En {
      * Creates a new StartingWorldSteps, with the code to make the starting world feature work.
      */
     public StartingWorldSteps() {
+        When("application is started with -help option", () -> {
+            System.setOut(new PrintStream(appResultOutputStream));
+            GOL.main(new String[]{"-help"});
+        });
         /*
         Starts the application flushing the definition into standard input.
          */
